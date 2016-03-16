@@ -1,0 +1,34 @@
+
+buildscript {
+    repositories {
+        flatDir {
+            dirs '../build/libs'
+        }
+    }
+    dependencies {
+        classpath "org.:org.tizen.gradle:1.0"
+    }
+}
+
+apply plugin: "tizen"
+
+tizen {
+
+    sdk {
+        sdkPath = "/home/dkyun77/tizen-sdk_tizen_sdk";
+    }
+
+    app {
+        type = "native"
+        platform = "mobile-2.4";
+    }
+
+    build_native {
+        arch = "x86";
+        compiler = "llvm";
+        configuration = "Debug";
+        jobs = 4;
+    }
+}
+
+

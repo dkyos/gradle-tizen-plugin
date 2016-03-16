@@ -1,0 +1,19 @@
+apply plugin: "groovy"
+apply plugin: "maven"
+
+group = "org.tizen"
+version = "1.0"
+
+repositories {
+    mavenCentral()
+}
+
+configurations {
+    deployerJars
+}
+
+dependencies {
+    compile gradleApi()
+    compile localGroovy()
+}
+
