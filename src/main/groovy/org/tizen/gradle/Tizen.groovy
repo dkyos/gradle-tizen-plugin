@@ -34,6 +34,7 @@ class Tizen {
         String configuration;
         int jobs;
         String rootstrap;
+        String buildDir;
     }
     NativeBuild build_native = new NativeBuild();
     def build_native(Closure closure) {
@@ -45,6 +46,26 @@ class Tizen {
         println("build_native.configuration:  " + build_native.configuration);
         println("build_native.jobs:  " + build_native.jobs);
         println("build_native.rootstrap:  " + build_native.rootstrap);
+        println("build_native.buildDir:  " + build_native.buildDir);
+    }
+
+    class Package{
+        String type;
+        String profileName;
+        String profilePath;
+        String strip;
+        String buildDir;
+    }
+    Package packaging = new Package();
+    def packaging(Closure closure) {
+        ConfigureUtil.configure(closure, packaging, false)
+    }
+    def package_dump() {
+        println("packaging.type:  " + packaging.type);
+        println("packaging.profileName:  " + packaging.profileName);
+        println("packaging.profilePath:  " + packaging.profilePath);
+        println("packaging.strip:  " + packaging.strip);
+        println("packaging.buildDir:  " + packaging.buildDir);
     }
 
     def dump() {
@@ -52,6 +73,7 @@ class Tizen {
         sdk_dump();
         app_dump();
         build_native_dump();
+        package_dump();
         println("=========================================");
     }
 

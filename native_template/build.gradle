@@ -28,6 +28,15 @@ tizen {
         compiler = "llvm";
         configuration = "Debug";
         jobs = 4;
+        buildDir = "./output";
+    }
+
+    packaging {
+        type = "tpk";
+        profileName = "test_alias";
+        profilePath = "/home/dkyun77/tizen-sdk_tizen_sdk-data/ide/keystore/profiles.xml";
+        strip = "on";
+        buildDir = "./Debug";
     }
 }
 
