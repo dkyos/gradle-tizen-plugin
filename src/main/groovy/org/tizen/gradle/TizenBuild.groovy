@@ -6,8 +6,6 @@ class TizenBuild extends TizenTask {
 
     @Override
         def configure(Tizen tizen) {
-            println("TizenBuild: configure " + "start");
-
             super.configure(tizen);
 
             tizen.sdk.args = "build-native";
@@ -26,10 +24,6 @@ class TizenBuild extends TizenTask {
             }
 
             tizen.sdk.args += " -- ./";
-
-            println("TizenTask: args " + tizen.sdk.args);
-
-            println("TizenBuild: configure " + "end");
         }
 
 }

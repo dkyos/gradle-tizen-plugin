@@ -3,16 +3,20 @@ import org.gradle.util.ConfigureUtil
 
 class Tizen {
 
+    int logLevel = 0;
+
     class SDK {
         String sdkPath;
         String args;
+        int logLevel;
     }
     SDK sdk = new SDK();
     def sdk(Closure closure) {
         ConfigureUtil.configure(closure, sdk, false)
     }
     def sdk_dump() {
-        println("sdk.sdkPath:   " + sdk.sdkPath);
+        if (logLevel)
+            println("sdk.sdkPath:   " + sdk.sdkPath);
     }
 
     class APP {
@@ -24,8 +28,10 @@ class Tizen {
         ConfigureUtil.configure(closure, app, false)
     }
     def app_dump() {
-        println("app.type:   " + app.type);
-        println("app.platform:   " + app.platform);
+        if (logLevel){
+            println("app.type:   " + app.type);
+            println("app.platform:   " + app.platform);
+        }
     }
 
     class NativeBuild{
@@ -41,12 +47,14 @@ class Tizen {
         ConfigureUtil.configure(closure, build_native, false)
     }
     def build_native_dump() {
-        println("build_native.arch:  " + build_native.arch);
-        println("build_native.compiler:  " + build_native.compiler);
-        println("build_native.configuration:  " + build_native.configuration);
-        println("build_native.jobs:  " + build_native.jobs);
-        println("build_native.rootstrap:  " + build_native.rootstrap);
-        println("build_native.buildDir:  " + build_native.buildDir);
+        if (logLevel){
+            println("build_native.arch:  " + build_native.arch);
+            println("build_native.compiler:  " + build_native.compiler);
+            println("build_native.configuration:  " + build_native.configuration);
+            println("build_native.jobs:  " + build_native.jobs);
+            println("build_native.rootstrap:  " + build_native.rootstrap);
+            println("build_native.buildDir:  " + build_native.buildDir);
+        }
     }
 
     class Package{
@@ -61,20 +69,24 @@ class Tizen {
         ConfigureUtil.configure(closure, packaging, false)
     }
     def package_dump() {
-        println("packaging.type:  " + packaging.type);
-        println("packaging.profileName:  " + packaging.profileName);
-        println("packaging.profilePath:  " + packaging.profilePath);
-        println("packaging.strip:  " + packaging.strip);
-        println("packaging.buildDir:  " + packaging.buildDir);
+        if (logLevel){
+            println("packaging.type:  " + packaging.type);
+            println("packaging.profileName:  " + packaging.profileName);
+            println("packaging.profilePath:  " + packaging.profilePath);
+            println("packaging.strip:  " + packaging.strip);
+            println("packaging.buildDir:  " + packaging.buildDir);
+        }
     }
 
     def dump() {
-        println("=========================================");
-        sdk_dump();
-        app_dump();
-        build_native_dump();
-        package_dump();
-        println("=========================================");
+        if (logLevel){
+            println("=========================================");
+            sdk_dump();
+            app_dump();
+            build_native_dump();
+            package_dump();
+            println("=========================================");
+        }
     }
 
 }

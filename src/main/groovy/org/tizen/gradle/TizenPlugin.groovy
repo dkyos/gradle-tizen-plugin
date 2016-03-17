@@ -7,7 +7,7 @@ class TizenPlugin implements Plugin<Project> {
     @Override
         void apply(Project project) {
 
-            println("TizenPlugin: apply " + "start");
+            println("Tizen Plugin Loaded");
 
             if (project.extensions.findByName("tizen") == null) {
                 project.extensions.create("tizen", Tizen)
@@ -15,8 +15,6 @@ class TizenPlugin implements Plugin<Project> {
 
             project.task("build", type: TizenBuild);
             project.task("package", type: TizenPackaging);
-
-            println("TizenPlugin: apply " + "end");
         }
 
 }

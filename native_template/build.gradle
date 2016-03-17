@@ -14,12 +14,14 @@ apply plugin: "tizen"
 
 tizen {
 
+    logLevel = 1;
+
     sdk {
         sdkPath = "/home/dkyun77/tizen-sdk_tizen_sdk";
     }
 
     app {
-        type = "native"
+        type = "native";
         platform = "mobile-2.4";
     }
 
