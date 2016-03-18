@@ -15,7 +15,6 @@ class TizenPackageTask extends TizenTask{
 
     StringBuilder sout = new StringBuilder();
     StringBuilder serr = new StringBuilder();
-    String command = project.ext.get('sdk.dir') + "/tools/ide/bin/tizen";
 
     @TaskAction
         protected void process() {
@@ -28,7 +27,7 @@ class TizenPackageTask extends TizenTask{
 
     private void packaging() {
         Tizen tizen = project.tizen;
-        String args = "package";
+        String args = " package";
 
         if(tizen.packaging.type){
             args += " --type " + tizen.packaging.type;
@@ -41,9 +40,8 @@ class TizenPackageTask extends TizenTask{
         }
 
         args += " -- " + tizen.packaging.buildDir;
-        command += " ${args}";
 
-        super.exec(command);
+        super.exec(args);
     }
 }
 

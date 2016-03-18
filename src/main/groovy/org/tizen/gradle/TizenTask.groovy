@@ -10,13 +10,25 @@ import org.gradle.api.tasks.JavaExec
 import java.nio.file.Files
 import java.nio.file.Paths
 import static groovy.io.FileType.FILES
+import org.apache.tools.ant.taskdefs.condition.Os
 
 class TizenTask extends DefaultTask{
 
-    public void exec(String command) {
+    public void exec(String args) {
         Tizen tizen = project.tizen;
         def proc = null;
         int exit;
+        String command = project.ext.get('sdk.dir');
+
+        if (Os.isFamily(Os.FAMILY_WINDOWS)) {
+            command += "/tools/ide/bin/tizen.bat ";
+        } else if (Os.isFamily(Os.FAMILY_MAC)) {
+            command += "/tools/ide/bin/tizen ";
+        } else if (Os.isFamily(Os.FAMILY_UNIX)) {
+            command += "/tools/ide/bin/tizen ";
+        }
+
+        command += args;
 
         logger.info("command: " + command);
 

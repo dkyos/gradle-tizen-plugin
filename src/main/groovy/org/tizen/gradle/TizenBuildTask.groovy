@@ -15,7 +15,6 @@ class TizenBuildTask extends TizenTask{
 
     StringBuilder sout = new StringBuilder();
     StringBuilder serr = new StringBuilder();
-    String command = project.ext.get('sdk.dir') + "/tools/ide/bin/tizen";
 
     @TaskAction
         protected void process() {
@@ -27,7 +26,7 @@ class TizenBuildTask extends TizenTask{
 
     private void build() {
         Tizen tizen = project.tizen;
-        String args = "build-native";
+        String args = " build-native";
 
         if(tizen.build_native.arch){
             args += " --arch " + tizen.build_native.arch;
@@ -43,9 +42,8 @@ class TizenBuildTask extends TizenTask{
         }
 
         args += " -- ./";
-        command += " ${args}";
 
-        super.exec(command);
+        super.exec(args);
     }
 }
 
