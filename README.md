@@ -43,5 +43,6 @@ TODO
 
 * build.gradle의 설정의 validation 구현이 필요하다
 * Web app도 지원해야 한다
+* Hard coding된 plugin jar 파일 참조를 SDK 위치로 바꿔야 한다
 * 빌드/패키지 유연성을 확보해야 한다
 * 현재는 Tizen CLI를 사용하는 방식이지만 추후 Tizen CLI 없이 독자 동작해야 한다
