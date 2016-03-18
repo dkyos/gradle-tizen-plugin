@@ -1,6 +1,6 @@
 package org.tizen.gradle
 
-class TizenPackaging extends TizenTask {
+class TizenPackageTask extends TizenTask {
 
     @Override
         def configure(Tizen tizen) {

@@ -21,24 +21,7 @@ class TizenTask extends JavaExec {
             configure(tizen);
             tizen.dump();
 
-            // Search sdk path in local.properties 
-            Properties props = new Properties();
-            props.load(new FileInputStream("$project.rootDir/local.properties"));
-            props.each { prop ->
-                project.ext.set(prop.key, prop.value);
-                //println("prop.key: " + prop.key); println("prop.value: " + prop.value);
-            }
             sdk_path = project.ext.get('sdk.dir');
-
-            // Search sdk path in Environments
-            if ( sdk_path == null ){
-                sdk_path = System.getenv('TIZEN_SDK')
-            }
-
-            if ( sdk_path == null || !Files.exists(Paths.get(sdk_path))) {
-                throw new InvalidUserDataException("Invalid Tizen SDK path: " + sdk_path)
-            }
-
             String command = sdk_path + "/tools/ide/bin/tizen ${tizen.sdk.args}";
 
             if (tizen.logLevel){

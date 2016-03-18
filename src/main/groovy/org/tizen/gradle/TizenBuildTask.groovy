@@ -2,7 +2,7 @@ package org.tizen.gradle
 
 import org.gradle.api.InvalidUserDataException
 
-class TizenBuild extends TizenTask {
+class TizenBuildTask extends TizenTask {
 
     @Override
         def configure(Tizen tizen) {
