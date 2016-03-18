@@ -5,14 +5,6 @@ class Tizen {
 
     int logLevel = 0;
 
-    class SDK {
-        String args;
-    }
-    SDK sdk = new SDK();
-    def sdk(Closure closure) {
-        ConfigureUtil.configure(closure, sdk, false)
-    }
-
     class APP {
         String type;
         String platform;

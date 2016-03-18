@@ -1,52 +1,35 @@
 package org.tizen.gradle
 import org.gradle.api.DefaultTask
+import org.gradle.api.tasks.InputFile
+import org.gradle.api.tasks.OutputFile
 import org.gradle.api.tasks.TaskAction
+import org.gradle.api.InvalidUserDataException
 import org.gradle.StartParameter
 import org.apache.tools.ant.taskdefs.condition.Os
-import org.gradle.api.InvalidUserDataException
 import org.gradle.api.tasks.JavaExec
 import java.nio.file.Files
 import java.nio.file.Paths
 import static groovy.io.FileType.FILES
 
-class TizenTask extends JavaExec {
+class TizenTask extends DefaultTask{
 
-    @Override
-        void exec() {
-            Tizen tizen = project.tizen;
-            String sdk_path = null;
+    public void exec(String command) {
+        Tizen tizen = project.tizen;
+        def proc = null;
+        int exit;
 
-            if (tizen.logLevel)
-                println("TizenTask: exec " + "start");
-            configure(tizen);
-            tizen.dump();
+        logger.info("command: " + command);
 
-            sdk_path = project.ext.get('sdk.dir');
-            String command = sdk_path + "/tools/ide/bin/tizen ${tizen.sdk.args}";
-
-            if (tizen.logLevel){
-                println("TizenTask: command: " + command);
-            }
-
-            int exit;
-            StringBuilder sout = new StringBuilder();
-            StringBuilder serr = new StringBuilder();
-
-            def proc = command.split().toList().execute();
+        if(command){
+            proc = command.split().toList().execute();
             proc.consumeProcessOutput(sout, serr);
             proc.waitFor();
 
             exit = proc.exitValue();
-            if (tizen.logLevel){
-                println("stdandard output of tizen command: \n$sout");
-            }
+
+            println("stdandard output of tizen command: \n$sout");
             println("stdandard error of tizen command: \n$serr");
         }
-
-    def configure(Tizen tizen) {
-        if (tizen.logLevel)
-            println("TizenTask: configure " + "start");
-        if (tizen.logLevel)
-            println("TizenTask: configure " + "end");
     }
 }
+
