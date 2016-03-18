@@ -31,13 +31,14 @@ USAGE
 native_template을 참조하면 된다.
 native_template 안의 아래 파일, 디렉터리를 Tizen Native App의 디렉터리에 복사 후 사용하면 된다.
 * build.gradle
-** Native app build/package 설정 빌드 스크립트이다
+ * Native app build/package 설정 빌드 스크립트이다
 * gradle  
 * gradlew  
 * gradlew.bat  
 * local.properties
-** sdk.dir 에 Tizen SDK의 설치 위치를 설정한다
-TODE
+ * sdk.dir 에 Tizen SDK의 설치 위치를 설정한다
+
+TODO
 =====
 
 * build.gradle의 설정의 validation 구현이 필요하다
