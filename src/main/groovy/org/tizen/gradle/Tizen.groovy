@@ -6,17 +6,11 @@ class Tizen {
     int logLevel = 0;
 
     class SDK {
-        String sdkPath;
         String args;
-        int logLevel;
     }
     SDK sdk = new SDK();
     def sdk(Closure closure) {
         ConfigureUtil.configure(closure, sdk, false)
-    }
-    def sdk_dump() {
-        if (logLevel)
-            println("sdk.sdkPath:   " + sdk.sdkPath);
     }
 
     class APP {
@@ -81,7 +75,6 @@ class Tizen {
     def dump() {
         if (logLevel){
             println("=========================================");
-            sdk_dump();
             app_dump();
             build_native_dump();
             package_dump();

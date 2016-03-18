@@ -14,27 +14,40 @@ class TizenTask extends JavaExec {
     @Override
         void exec() {
             Tizen tizen = project.tizen;
+            String sdk_path = null;
 
             if (tizen.logLevel)
                 println("TizenTask: exec " + "start");
             configure(tizen);
-
             tizen.dump();
 
-            if (tizen.sdk.sdkPath == null || !Files.exists(Paths.get(tizen.sdk.sdkPath))) {
-                throw new InvalidUserDataException("Invalid Tizen sdkPath: " + tizen.sdk.sdkPath)
+            // Search sdk path in local.properties 
+            Properties props = new Properties();
+            props.load(new FileInputStream("$project.rootDir/local.properties"));
+            props.each { prop ->
+                project.ext.set(prop.key, prop.value);
+                //println("prop.key: " + prop.key); println("prop.value: " + prop.value);
+            }
+            sdk_path = project.ext.get('sdk.dir');
+
+            // Search sdk path in Environments
+            if ( sdk_path == null ){
+                sdk_path = System.getenv('TIZEN_SDK')
             }
 
-            if (tizen.logLevel)
-                println("TizenTask: args " + tizen.sdk.args);
+            if ( sdk_path == null || !Files.exists(Paths.get(sdk_path))) {
+                throw new InvalidUserDataException("Invalid Tizen SDK path: " + sdk_path)
+            }
 
-            String command = "${tizen.sdk.sdkPath}/tools/ide/bin/tizen ${tizen.sdk.args}";
+            String command = sdk_path + "/tools/ide/bin/tizen ${tizen.sdk.args}";
+
+            if (tizen.logLevel){
+                println("TizenTask: command: " + command);
+            }
+
             int exit;
             StringBuilder sout = new StringBuilder();
             StringBuilder serr = new StringBuilder();
-
-            if (tizen.logLevel)
-                println("TizenTask: command :" + command);
 
             def proc = command.split().toList().execute();
             proc.consumeProcessOutput(sout, serr);
