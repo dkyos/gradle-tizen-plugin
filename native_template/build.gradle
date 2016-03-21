@@ -6,7 +6,7 @@ buildscript {
         }
     }
     dependencies {
-        classpath "org.:org.tizen.gradle:1.0"
+        classpath group: 'gradle-tizen-plugin', name: 'gradle-tizen-plugin', version: '1.0'
     }
 }
 
